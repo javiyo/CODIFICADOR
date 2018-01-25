@@ -6,14 +6,16 @@ contains
 	character, intent(in) :: a
 	integer :: var,letranum
 	letranum=iachar(a) - 96 !Funciona gracias a la funcion iachar() que nos devuelve el valor ASCII de cada letra
-				!El -96 es unicamente para que sea acorde a los numeros que nos proporciona fernando en la tabla
-	end function 
+	end function		!El -96 es unicamente para que sea acorde a los numeros que nos proporciona fernando en la tabla 
 	
 	function numletra(n)
 	integer, intent(in) :: n
-	character :: numletra     !Funcion inversa de la anterior, achar() nos devuelve una letra al meter un entero
-					!Tenemos que deshacer el -96 de antes
+	character :: numletra   
+	if ((n+96)==0) then
+		numletra=("z")
+	else				  !Funcion inversa de la anterior, achar() nos devuelve una letra al meter un entero
 	numletra=achar(n+96)
+	end if 				  !Tenemos que deshacer el -96 de antes
 	end function
 
 
@@ -31,27 +33,42 @@ contains
 	integer, intent(in) :: a,k
 	integer :: mul, multiplicativo
 	mul = k*a
-	if (mod(k,2)==0.OR.mod(k,13)==0) then
-		print *, 'Error, con esa clave es imposible encontrar inversa'
-	end if
 	multiplicativo=mod(mul,26)	!Como el valor puede ser mayor de 26 deberemos de calcular el resto al seguir con los numeros
 	end function multiplicativo
 		
 	function afin(a,k,b)
 	integer, intent(in) :: a,k,b
-	integer :: afin, af                   !Afin (realiza el multiplicativo y le suma el aditivo)
-	if (mod(k,2)==0.OR.mod(k,13)==0) then
-		print *, 'Error, con esa clave es imposible encontrar inversa'
-	end if
-	af = k*a+b
-	afin=mod(af,26)
+	integer :: afin                 !Afin (realiza el multiplicativo y le suma el aditivo)	
+	afin=mod(k*a+b,26)
 	end function afin
+
+	function rkaditivo(k)
+	integer,intent(in) :: k
+	integer :: rkaditivo, ad
+	ad=k
+	do while (ad>26)
+	ad=ad-26
+	end do
+	rkaditivo=26-ad
+	end function rkaditivo
 	
-
-
-
-
-
-
+	function rkmultiplicativo(k)
+	integer, intent(in) :: k
+	integer :: rkmultiplicativo, i=1
+	do while (mod(26*i+1,k)/=0)
+	i=i+1
+	end do
+	rkmultiplicativo=(26*i+1)/k
+	end function rkmultiplicativo
+	
+	subroutine rkafin(k,b)
+	integer :: k, b
+	k=rkmultiplicativo(k)
+	b=rkaditivo(b)*k
+	do while (b>26) 
+	b= b-26
+	end do
+	end subroutine
+	
 
 end module criptografia
