@@ -1,6 +1,6 @@
-program main
+program cifrador
 use criptografia
-integer :: tecnic, k,b
+integer :: tecnic, k,b,i
 character(len=10) :: archivoplano, archivociph
 character :: letra
 	print *, '¿Que tecnica de cifrado quieres emplear?'
@@ -8,17 +8,31 @@ character :: letra
 	print *, 'Para multiplicativo introduzca 2'
 	print *, 'Para afin introduzca 3'
 	read *, tecnic
-	if (tecnic==3) then
-		print *, 'Introduce las claves de cifrado'
-		read *, k,b
-	else
-		print *, 'Introduce la clave de cifrado'
-		read *, k
-	end if
+
+	
+	i=0
+	do while(i==0)
+		if (tecnic==3) then
+			print *, 'Introduce las claves de cifrado'
+			read *, k,b
+		else
+			print *, 'Introduce la clave de cifrado'
+			read *, k
+		end if
+		k=abs(k)
+		b=abs(b)
+		if ((mod(k,2)==0.OR.mod(k,13)==0).AND.(tecnic==3.OR.tecnic==2)) then
+			print *, 'Error, con esa clave es imposible encontrar inversa'
+		else
+			i=1
+		end if
+	end do
+	
 	print *, '¿Como se llama el archivo con el mensaje a cifrar?(sin extension)'
 	read *, archivoplano
 	print *, '¿Como quieres llamar al archivo con el mensaje cifrado?(sin extension)'
 	read *, archivociph
+	
 			open(unit=11, file=trim(archivoplano)//".txt",status="old")
 			open(unit=12, file=trim(archivociph)//".cfr")
 
@@ -38,4 +52,5 @@ character :: letra
 		write(12, "(A1)",advance='no')numletra(afin(letranum(letra),k,b))
 		end do
 	end if
+end program cifrador
 end program main
