@@ -30,9 +30,9 @@ character :: letra
 
 	
 	print *, '¿Como se llama el archivo con el mensaje que quieres descifrar?(sin extension)'
-	read *, archivoplano
-	print *, '¿Como quieres llamar al archivo con el mensaje descifrado?(sin extension)'
 	read *, archivociph
+	print *, '¿Como quieres llamar al archivo con el mensaje descifrado?(sin extension)'
+	read *, archivoplano
 	
 			open(unit=11, file=trim(archivociph)//".cfr",status="old")
 			open(unit=12, file=trim(archivoplano)//".dcf")
