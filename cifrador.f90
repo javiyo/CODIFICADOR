@@ -53,4 +53,3 @@ character :: letra
 		end do
 	end if
 end program cifrador
-end program main
