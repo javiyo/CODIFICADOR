@@ -1,6 +1,6 @@
 program cifrador
 use criptografia
-integer :: tecnic, k,b,i
+integer :: tecnic, k,b,i,long
 character(len=10) :: archivoplano, archivociph
 character :: letra
 	print *, '¿Que tecnica de cifrado quieres emplear?'
@@ -35,19 +35,21 @@ character :: letra
 	
 			open(unit=11, file=trim(archivoplano)//".txt",status="old")
 			open(unit=12, file=trim(archivociph)//".cfr")
+	
+	long=larguitud(11)
 
 	if (tecnic==1) then
-		do i=1,80
+		do i=1,long
 		read(11, "(A1)",advance='no')letra
 		write(12, "(A1)",advance='no')numletra(aditivo(letranum(letra),k))
 		end do
 	else if (tecnic==2) then
-		do i=1,80
+		do i=1,long
 		read(11, "(A1)",advance='no')letra
 		write(12, "(A1)",advance='no')numletra(multiplicativo(letranum(letra),k))
 		end do
 	else if (tecnic==3) then
-		do i=1,80
+		do i=1,long
 		read(11, "(A1)",advance='no')letra
 		write(12, "(A1)",advance='no')numletra(afin(letranum(letra),k,b))
 		end do
