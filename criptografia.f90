@@ -30,6 +30,7 @@ contains
 	integer :: mul, multiplicativo
 	mul = k*a
 	multiplicativo=mod(mul,26)	!Como el valor puede ser mayor de 26 deberemos de calcular el resto al seguir con los numeros
+	if (multiplicativo==0) multiplicativo=26
 	end function multiplicativo
 		
 	function afin(a,k,b)
@@ -66,6 +67,14 @@ contains
 	b= b-26
 	end do
 	end subroutine
-	
+
+	function larguitud(a)
+	integer, intent(in) :: a
+	character(len=32767) :: texto
+	read(a,*)texto
+	rewind(a)
+	larguitud=len_trim(texto)
+	if (larguitud>80) print*,"ERROR; El texto a cifrar debe tener menos de 80 caracteres"
+	end function larguitud
 
 end module criptografia
