@@ -35,7 +35,7 @@ character :: letra
 	
 			open(unit=11, file=trim(archivoplano)//".txt",status="old")
 			open(unit=12, file=trim(archivociph)//".cfr")
-	
+
 	long=larguitud(11)
 
 	if (tecnic==1) then
@@ -53,5 +53,7 @@ character :: letra
 		read(11, "(A1)",advance='no')letra
 		write(12, "(A1)",advance='no')numletra(afin(letranum(letra),k,b))
 		end do
+	else
+		print *, "Error, seleccion de tecnica incorrecta"
 	end if
 end program cifrador
