@@ -32,7 +32,7 @@ character :: letra
 	read *, archivoplano
 	print *, '¿Como quieres llamar al archivo con el mensaje cifrado?(sin extension)'
 	read *, archivociph
-                            !Apertura de los archivos para lectura y posterior escritura
+                            !Apertura de los archivos para lectura y posterior escritura, , la extension es añadida automaticamente
 			open(unit=11, file=trim(archivoplano)//".txt",status="old")
 			open(unit=12, file=trim(archivociph)//".cfr") 
 
@@ -41,7 +41,7 @@ character :: letra
 	if (tecnic==1) then
 		do i=1,long
 		read(11, "(A1)",advance='no')letra
-		write(12, "(A1)",advance='no')numletra(aditivo(letranum(letra),k))
+		write(12, "(A1)",advance='no')numletra(aditivo(letranum(letra),k)) !Va llamando a las distintas funciones con los argumentos correctos
 		end do
 	else if (tecnic==2) then
 		do i=1,long
