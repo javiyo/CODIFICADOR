@@ -81,7 +81,10 @@ contains
 	read(a,*)texto
 	rewind(a)
 	larguitud=len_trim(texto)!Cuenta los caracteres del texto sin espacios
-	if (larguitud>80) print*,"ERROR; El texto a cifrar debe tener menos de 80 caracteres"
+	if (larguitud>80) then
+		print*,"ERROR; El texto a cifrar debe tener menos de 80 caracteres"
+		stop
+	end if
 	end function larguitud
 
 end module criptografia
