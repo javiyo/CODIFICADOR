@@ -56,4 +56,6 @@ character :: letra
 	else
 		print *, "Error, seleccion de tecnica incorrecta" !Error debido a la introduccion de un número distinto de 1,2,3,ya que solo esos numeros tienen asignados las tecnicas de cifrados
 	end if
+	close(11)
+	close(12)
 end program cifrador
