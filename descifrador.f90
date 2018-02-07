@@ -58,5 +58,7 @@ character :: letra
 	else
 		print *, "Error, seleccion de tecnica incorrecta" !Error que se da cuando se introduce un numero distinto de 1,2,3,ya que solo esos numeros tienen asignados las técnicas de cifrado
 	end if
+	close(11)
+	close(12)
 
 end program decipher
