@@ -21,7 +21,9 @@ $gfortran cifrador.f90 criptografia.f90 -o cifrador
 $gfortran descifrador.f90 criptografia.f90 -o descifrador
 
 Para correr
+
 $./cifrador
+
 $./descifrador
 
 Nota: El $ es solo para indicar el comando, no ponerlo en el terminal
